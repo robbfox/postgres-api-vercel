@@ -17,10 +17,12 @@ module.exports = async (req, res) => {
       if (result.rows.length === 0 || !result.rows[0].min_id) {
         return res.status(404).json({ error: 'No reports found in the database.' });
       }
+
+      // Return the minimum `id` as the response
       return res.status(200).json({ min_id: result.rows[0].min_id });
     }
 
-    // Query the database for the specific report using the `id` parameter
+    // If an `id` is provided, use it to get the specific report
     const result = await pool.query('SELECT * FROM public.orp_audit_raws WHERE "id" = $1;', [id]);
 
     if (result.rows.length === 0) {
