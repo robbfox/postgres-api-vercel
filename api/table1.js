@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
   try {
     // Run the authentication middleware
     await authMiddleware(req, res, () => {});
-    const result = await pool.query('SELECT MIN(id) as min_id FROM public.orp_audit_raws;');
+    const result = await pool.query('SELECT MIN("id") as min_id FROM public.orp_audit_raws;');
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Report not found.' });
     }
