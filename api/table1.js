@@ -11,12 +11,6 @@ module.exports = async (req, res) => {
     // Extract the `id` parameter from the request (e.g., URL query or route parameter)
     const { id } = req.query; // Or req.params if using route parameters like /api/report/:id
 
-    if (!id) {
-      // If the `id` is not provided, get the minimum `id` from the database
-      const result = await pool.query('SELECT "id" as min_id FROM public.orp_audit_raws ORDER BY "id" LIMIT 1;');
-      if (result.rows.length === 0 || !result.rows[0].min_id) {
-        return res.status(404).json({ error: 'No reports found in the database.' });
-      }
 
       // Return the minimum `id` as the response
       return res.status(200).json({ min_id: result.rows[0].min_id });
