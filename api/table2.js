@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
 
     if (!id) {
       return res.status(400).json({ error: 'Missing report ID.' });
-    }!
+    }
 
 
 
