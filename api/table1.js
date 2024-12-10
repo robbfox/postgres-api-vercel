@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
 
     if (!id) {
       // If the `id` is not provided, get the minimum `id` from the database
-      const result = await pool.query('SELECT MIN("id") as min_id FROM public.orp_audit_raws;');
+      const result = await pool.query('SELECT "id" as min_id FROM public.orp_audit_raws ORDER BY "id" LIMIT 1;');
       if (result.rows.length === 0 || !result.rows[0].min_id) {
         return res.status(404).json({ error: 'No reports found in the database.' });
       }
